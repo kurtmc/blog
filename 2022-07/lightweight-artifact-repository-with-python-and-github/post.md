@@ -1,3 +1,8 @@
+---
+title: Lightweight artifact repository with Python and GitHub
+published: false
+tags: python
+---
 # Lightweight artifact repository with Python and GitHub
 
 Code reuse is fundamental to reducing the cost of software development, reusing
