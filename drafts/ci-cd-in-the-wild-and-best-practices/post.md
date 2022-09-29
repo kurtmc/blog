@@ -1,6 +1,24 @@
 # CI/CD in the wild and best practices
 
-Through my work as a consultant I have been exposed to some varying opinions and implementations of CI/CD practices which I believe has put me in a good position to talk about some of the benefits and disadvantages of the approaches I have seen. I would also like to describe an approach that takes into account the needs of many organisations and I consider best practice.
+Through my work as a consultant I have been exposed to some varying opinions
+and implementations of CI/CD practices which I believe has put me in a good
+position to talk about some of the benefits and disadvantages of the approaches
+I have seen. I would also like to describe an approach that takes into account
+the needs of many organisations and I consider best practice.
+
+## Trunk based development
+
+Most organisations strive to run multiple environments for their application
+stack. At a minimum organisations will have a "dev" and a "prod"
+environment. As a quick shortcut these organisations will decide to map git
+branches to these environments and setup their CI system to watch changes to
+these branches and deploy those changes directly to the environment they are
+associated with. They have it setup like the diagram below:
+
+![](https://github.com/kurtmc/blog/raw/master/drafts/ci-cd-in-the-wild-and-best-practices/images/branch_based_deployements.png)
+
+
+At many org
 
 Structure:
 1. Describe real approaches that I have seen, criticise

@@ -1,0 +1,21 @@
+@startuml branch_based_deployements
+
+scale 1080*1920
+skinparam ArrowFontSize 8
+
+
+component git_repository as "git repository" {
+	rectangle dev as "branch: dev"
+	rectangle prod as "branch: prod"
+}
+
+component dev_environment as "dev environment" {
+}
+
+component prod_environment as "prod environment" {
+}
+
+dev --> dev_environment
+prod --> prod_environment
+
+@enduml
