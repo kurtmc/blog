@@ -46,9 +46,18 @@ to do the following steps:
 3. Create a pull request from the "dev" branch to the "staging" branch
 4. Create a pull request from the "staging" branch to the "prod" branch
 
+That's 3 pull requests, imagine trying to get a small bug fix merged into
+"prod" in this scenario, depending on your pull request review process this
+could take a very long time.
 
 
-draft notes:
+There is a better way, it's called trunk based development and it simplifies
+this process but requires you to build enough automated testing so that you are
+confident changes that pass the tests are safe to deploy to production.
+
+
+
+# draft notes:
 
 ```
 Structure:
