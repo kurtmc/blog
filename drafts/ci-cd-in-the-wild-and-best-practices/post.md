@@ -88,3 +88,7 @@ Ideas:
 20. Deploying multiple environments to the same accounts is a bad idea
 21. You should avoid creating differences between the IAM relationships, each environment should contain the entire IAM relationship so that it can be developed before deploying to production
 ```
+
+# links
+
+blog post: https://aztfmod.github.io/documentation/docs/fundamentals/lz-intro/
