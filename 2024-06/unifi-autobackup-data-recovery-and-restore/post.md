@@ -98,7 +98,7 @@ This may produce a very large file depending on your Unifi deployment size and i
 {"__cmd":"select","collection":"devices"}
 ```
 
-I wrote a small program in go that can be used to load this data directly into the mongodb database:
+I wrote a [small program in go](https://github.com/kurtmc/blog/blob/master/2024-06/unifi-autobackup-data-recovery-and-restore/files/main.go) that can be used to load this data directly into the mongodb database:
 
 copy the `dump.json` file into the container:
 ```
@@ -108,7 +108,7 @@ docker container cp dump.json 5ab135e2d58b:/dump.json
 download and run the program:
 ```
 docker exec -it 5ab135e2d58b bash
-curl -O ...
+curl -O https://github.com/kurtmc/blog/raw/master/2024-06/unifi-autobackup-data-recovery-and-restore/files/unifi-restore
 ./unifi-restore /dump.json
 ```
 
