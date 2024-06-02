@@ -16,7 +16,10 @@ func main() {
 		panic(err)
 	}
 
-	articleDirectories := []string{"2022-07/lightweight-artifact-repository-with-python-and-github"}
+	articleDirectories := []string{
+		"2022-07/lightweight-artifact-repository-with-python-and-github",
+		"2024-06/unifi-autobackup-data-recovery-and-restore",
+	}
 
 	for _, articleDirectory := range articleDirectories {
 		title, err := getTitle(articleDirectory)

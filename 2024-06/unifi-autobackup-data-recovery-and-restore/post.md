@@ -15,8 +15,10 @@ Some work was being carried out on the EC2 instance that runs Unifi and as part 
 
 ![](https://github.com/kurtmc/blog/raw/master/2024-06/unifi-autobackup-data-recovery-and-restore/images/not_a_valid_backup.png)
 
-**Error restoring backup**
-**"{filename}" is not a valid backup.**
+```
+Error restoring backup
+"{filename}" is not a valid backup.
+```
 
 *For the purposes of helping out others who might be in this situation, this all relates to version 8.0.24 of Unifi controller and specifically we were using this docker image https://hub.docker.com/r/linuxserver/unifi-controller which is now deprecated and you should be using the following instead https://hub.docker.com/r/linuxserver/unifi-network-application *
 
@@ -25,7 +27,6 @@ WHAT!
 Ok, there must be something useful in the HTTP response:
 
 ```
-
 HTTP/1.1 400 
 X-Frame-Options: DENY
 Content-Type: application/json;charset=UTF-8
@@ -50,7 +51,6 @@ chmod +x decrypt.sh
 This produces a zip file, that seems to be completely broken:
 
 ```
-$ unzip autobackup.zip
 $ unzip autobackup.zip 
 Archive:  autobackup.zip
   End-of-central-directory signature not found.  Either this file is not
@@ -92,24 +92,22 @@ Now the `db` file can be converted to plain text with MongoDB Database Tools, wh
 bsondump db > dump.json
 ```
 
-This may produce a very large file depending on your Unifi deployment size and if you look into the data you see sections headed with something like this and data that follows that section. For for example the lines after `{"__cmd":"select","collection":"devices"}` contain all the mongodb objects in the `devices` collection
+This may produce a very large file depending on your Unifi deployment size and if you look into the data you see sections and data that seems to be for that section. For for example the lines after `{"__cmd":"select","collection":"devices"}` contain all the mongodb objects in the `devices` collection
 
-```
-{"__cmd":"select","collection":"devices"}
-```
+I wrote a [small program in go](https://github.com/kurtmc/blog/blob/master/2024-06/unifi-autobackup-data-recovery-and-restore/files/main.go) that can be used to load this data directly into the mongodb database. Which you can do by following these steps:
 
-I wrote a [small program in go](https://github.com/kurtmc/blog/blob/master/2024-06/unifi-autobackup-data-recovery-and-restore/files/main.go) that can be used to load this data directly into the mongodb database:
-
-copy the `dump.json` file into the container:
+- copy the `dump.json` file into the container:
 ```
 docker container cp dump.json 5ab135e2d58b:/dump.json
 ```
 
-download and run the program:
+- download and run the program
 ```
 docker exec -it 5ab135e2d58b bash
 curl -O https://github.com/kurtmc/blog/raw/master/2024-06/unifi-autobackup-data-recovery-and-restore/files/unifi-restore
 ./unifi-restore /dump.json
 ```
 
-depending on the size of your backup, this can take hours, but once it's complete you can complete, you can restart the Unifi application and you should have access to your data. If the program fails, make sure you read the error, it may be due to the buffer size being too small or the max token size being too small, both of which can be configured using environment variables.
+- depending on the size of your backup, this can take hours, but once it's complete you can complete, you can restart the Unifi application and you should have access to your data. If the program fails, make sure you read the error, it may be due to the buffer size being too small or the max token size being too small, both of which can be configured using environment variables.
+
+I hope you don't find yourself in this situation where you must rely on the autobackups, but if you do, I hope this helps!
