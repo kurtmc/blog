@@ -1,6 +1,6 @@
 ---
 title: Unifi Autobackup Data Recovery and Restore
-published: false
+published: true
 tags: unifi, bash, go
 ---
 # Unifi Autobackup Data Recovery and Restore
@@ -63,7 +63,7 @@ unzip:  cannot find zipfile directory in one of autobackup.zip or
         autobackup.zip.zip, and cannot find autobackup.zip.ZIP, period.
 ```
 
-but, the can be extracted further if you use [7zip](https://www.7-zip.org/download.html), which can be installed on Linux or Mac:
+but, this can be extracted further if you use [7zip](https://www.7-zip.org/download.html), which can be installed on Linux or Mac:
 
 ```
 # Ubuntu
@@ -112,6 +112,6 @@ curl -O https://github.com/kurtmc/blog/raw/master/2024-06/unifi-autobackup-data-
 ./unifi-restore /dump.json
 ```
 
-Depending on the size of your backup, this can take hours, but once it's complete you can complete, you can restart the Unifi application and you should have access to your data. If the program fails, make sure you read the error, it may be due to the buffer size being too small or the max token size being too small, both of which can be configured using environment variables.
+Depending on the size of your backup, this can take hours, but once it has completed you should restart the Unifi application. If the program fails, make sure you read the error, it may be due to the buffer size being too small or the max token size being too small, both of which can be configured using environment variables.
 
 I hope you don't find yourself in this situation where you must rely on the autobackups, but if you do, I hope this helps!
